@@ -4,8 +4,10 @@ package com.example.backendapi.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "PRODUCTS")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
@@ -14,12 +16,12 @@ public class Product {
    // private int id;
     private int productID;
 
-    @Column(name = "NAME")
+    @Column(name = "PRODUCTNAME")
     private String productName;
     private int supplierID;
     private int categoryID;
     private String quantityPerunit;
-    private double unitPrice;
+    private BigDecimal unitPrice;
     private int unitsInStock;
     private int unitsOnorder;
     private int Reorderlevel;
@@ -64,15 +66,15 @@ public class Product {
         return quantityPerunit;
     }
 
-    public void setQuantityPerunit(String quantityPerunit) {
-        this.quantityPerunit = quantityPerunit;
+    public void setQuantityPerunit(String QuantityPerUnit) {
+        this.quantityPerunit = QuantityPerUnit;
     }
 
-    public double getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -16,21 +17,20 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public List<Customer> getCustomers() {
-        return customerRepository.findAll();
+        return (List<Customer>) customerRepository.findAll();
     }
 
     public Customer addCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 
-    public Customer getCustomer(Long id) {
-        return customerRepository.getReferenceById(id);
+    public Optional<Customer> getCustomer(String id) {
+        return customerRepository.findById(id);
     }
 
 
-    public void deleteCustomer(Long id) {
+    public void deleteCustomer(String id) {
         customerRepository.deleteById(id);
-        //  this.getCustomers();
     }
 
 }

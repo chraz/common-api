@@ -30,12 +30,12 @@ public class ProductService {
         return this.getProducts(true);
     }
 
-    private List<Product> getProducts(boolean detailed){
+     private List<Product> getProducts(boolean detailed){
 
-        String query = "select ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued from products;";
+       String query = "select ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued from products;";
 
         if(detailed){
-            query = "select ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued from products;";
+            query = "select ProductID, ProductName, SupplierID, CategoryID, Quantity_PerUnit, Unit_Price, Units_In_Stock, Units_OnOrder, ReorderLevel, Discontinued from products;";
         }
 
 
@@ -49,13 +49,19 @@ public class ProductService {
             product.setProductName((String)row.get("ProductName"));
             product.setCategoryID((Integer)row.get("CategoryID"));
             product.setQuantityPerunit((String)row.get("QuantityPerUnit"));
-            product.setUnitPrice(((BigDecimal)row.get("UnitPrice")).doubleValue());
-            product.setUnitsInStock((Integer)row.get("UnitsInStock"));
+
+           if(row.get("UnitPrice")!= null){product.setUnitPrice((BigDecimal) row.get("UnitPrice"));}
+           if(row.get("UnitsInStock")!= null){product.setUnitsInStock((Integer)row.get("UnitsInStock"));}
+       //     product.setUnitPrice(((BigDecimal)row.get("UnitPrice")).doubleValue());
+          //  product.setUnitsInStock((Integer)row.get("UnitsInStock"));
             if(detailed){
                 product.setSupplierID((Integer)row.get("SupplierID"));
-                product.setUnitsOnorder((Integer)row.get("UnitsOnOrder"));
+                if(row.get("UnitsOnOrder")!= null){product.setUnitsOnorder((Integer)row.get("UnitsOnOrder"));}
+              //  product.setUnitsOnorder((Integer)row.get("UnitsOnOrder"));
                 product.setReorderlevel((Integer)row.get("ReorderLevel"));
-                product.setDiscontinued((Boolean) row.get("Discontinued"));
+
+                if(row.get("Discontinued")!= null){product.setDiscontinued((Boolean) row.get("Discontinued"));}
+             //   product.setDiscontinued((Boolean) row.get("Discontinued"));
             }
 
             products.add(product);
