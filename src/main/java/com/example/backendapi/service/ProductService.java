@@ -47,6 +47,7 @@ public class ProductService {
 
             product.setProductID((Integer)row.get("ProductID"));
             product.setProductName((String)row.get("ProductName"));
+           // product.getCategories().getCategoryID();
             product.setCategoryID((Integer)row.get("CategoryID"));
             product.setQuantityPerunit((String)row.get("QuantityPerUnit"));
 

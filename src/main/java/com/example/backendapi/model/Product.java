@@ -7,25 +7,35 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "products")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE)
    // private int id;
+    @Id
     private int productID;
 
     @Column(name = "PRODUCTNAME")
     private String productName;
     private int supplierID;
-    private int categoryID;
+
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "CategoryID", referencedColumnName = "CategoryID"),
+            @JoinColumn(name = "CategoryName", referencedColumnName = "CategoryName")
+    })
+    private categories categories;
+
     private String quantityPerunit;
     private BigDecimal unitPrice;
     private int unitsInStock;
     private int unitsOnorder;
     private int Reorderlevel;
     private boolean isDiscontinued;
+   // private int categoryID;
 
     public Product() {
     }
@@ -54,12 +64,13 @@ public class Product {
         this.supplierID = supplierID;
     }
 
-    public int getCategoryID() {
-        return categoryID;
+
+    public categories getCategories() {
+        return categories;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setCategories(categories categories) {
+        this.categories = categories;
     }
 
     public String getQuantityPerunit() {
@@ -109,4 +120,9 @@ public class Product {
     public void setDiscontinued(boolean discontinued) {
         isDiscontinued = discontinued;
     }
+
+    public void setCategoryID(Integer categoryID) {
+    }
+
+
 }

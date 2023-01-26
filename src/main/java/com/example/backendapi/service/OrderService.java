@@ -79,15 +79,15 @@ public class OrderService {
 
 
     public void createOrder(String customer_id) {
-        Customer customer = customerRepository.getReferenceById(String.valueOf(customer_id));
         Order order = new Order();
+        Customer customer = customerRepository.getReferenceById(String.valueOf(customer_id));
         order.setCustomer(customer);
         orderRepository.save(order);
     }
 
     public List<Order> getOrdersForCustomer(String customerId) {
         Customer customer = customerRepository.getReferenceById(customerId.trim());
-        return orderRepository.findByCustomer(customer);
+         return orderRepository.findByCustomer(customer);
     }
 
     public int addOrder(String customerId, Long productId) {

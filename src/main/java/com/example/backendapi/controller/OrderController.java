@@ -28,7 +28,7 @@ public class OrderController {
 
 
     @CrossOrigin
-    @GetMapping("/addOrder/{customerId}/{productId}/")
+    @PostMapping("/addOrder/{customerId}/{productId}/")
     public int add(@PathVariable String customerId, @PathVariable Long productId) {
         return orderService.addOrder(customerId, productId); }
 
@@ -37,7 +37,6 @@ public class OrderController {
     public void createOrder(@PathVariable String customerId) {
         orderService.createOrder(customerId);
     }
-
     @GetMapping("/orders/{customerId}")
     public List<Order> getOrders(@PathVariable String customerId) {
         return orderService.getOrdersForCustomer(customerId);

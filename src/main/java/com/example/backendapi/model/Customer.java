@@ -9,9 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customer {
 
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;*/
+
 
     @Id
     @Column(name = "CustomerID", nullable = false, length = 5)
@@ -149,6 +147,7 @@ public class Customer {
     public void setId(String id) {
         this.id = id;
     }
+
 }
 
 

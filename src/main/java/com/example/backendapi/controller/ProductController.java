@@ -48,22 +48,6 @@ public class ProductController {
     public void deleteProduct(@PathVariable Long id)  {  productService.deleteProduct(id);
     }
 
-   /* @PostMapping("/recommendation")
-    public void addRecommendation(@RequestBody Recommendation recommendation) {
-        WebClient client = WebClient.create("http://recommendation-service.labnet.io:8888");
-     //   WebClient client = WebClient.create("http://localhost:8888/");
-        var result = client.post()
-                .uri("/recommendation")
-                .body(Mono.just(recommendation), Recommendation.class)
-                .retrieve()
-                .bodyToMono(JsonNode.class)
-                .block();
-    }
-
-*/
-    /*
-    •Get all recommendationsGET /recommendationsReturns an array of recommendation objects•Add a recommendationPOST /recommendationProvide a recommendation as request objec
-     */
 
     @CrossOrigin
     @GetMapping("/products")
@@ -77,13 +61,6 @@ public class ProductController {
         return productService.getAllProductsDetailed();
     }
 
-
-
-  /*  @CrossOrigin
-    @GetMapping("/productsdetailed")
-    public List<Product> getAllProductsDetailed(){
-        return productService.getAllProductsDetailed();
-    }*/
 
 
     @Autowired
@@ -158,6 +135,21 @@ public class ProductController {
                 .block();
 
         logger.info("result: "+result);
+    }
+
+    //Get price for cart in other currencyPOST/convertCurrency/{currency
+    @GetMapping("/currency/")
+    public List<Price> getPrice(@PathVariable long id) {
+        WebClient client = WebClient.create("http://localhost:8888");
+        Mono<List<Recommendation>> recommendations;
+        recommendations = client.get()
+                .uri("/api/v1/recommendation/{id}",id)
+                .retrieve().
+                bodyToMono(new ParameterizedTypeReference<>()
+                {
+                });
+
+        return recommendations.block();
     }
 
 

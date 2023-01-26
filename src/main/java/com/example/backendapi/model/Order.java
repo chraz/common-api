@@ -9,13 +9,16 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name="ORDERS")
+@Table(name="orders")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Order {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int orderID;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "OrderID", nullable = false)
+    private int OrderID;
+
     private String customerID;
     private LocalDateTime orderDate;
     private LocalDateTime requiredDate;
@@ -25,7 +28,7 @@ public class Order {
     }
 
     public Order(int orderID, String customerID, LocalDateTime orderDate, LocalDateTime requiredDate, LocalDateTime shippedDate) {
-        this.orderID = orderID;
+        this.OrderID = orderID;
         this.customerID = customerID;
         this.orderDate = orderDate;
         this.requiredDate = requiredDate;
@@ -33,11 +36,11 @@ public class Order {
     }
 
     public int getOrderID() {
-        return orderID;
+        return OrderID;
     }
 
     public void setOrderID(int orderID) {
-        this.orderID = orderID;
+        this.OrderID = orderID;
     }
 
     public String getCustomerID() {
